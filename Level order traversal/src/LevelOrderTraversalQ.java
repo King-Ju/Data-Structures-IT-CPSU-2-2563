@@ -10,8 +10,7 @@ import javax.swing.tree.DefaultMutableTreeNode;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-/**
- *
+/*
  * @author User
  * ขอขอบคุณอัลกอลิทึมจาก LevelOrderTraversalQ https://www.geeksforgeeks.org/level-order-traversal-line-line-set-3-using-one-queue/
  */

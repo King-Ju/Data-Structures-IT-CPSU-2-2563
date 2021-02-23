@@ -62,9 +62,9 @@ public class NewJFrame extends javax.swing.JFrame {
         });
 
         jTextField1.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        jTextField1.setText("jTextField1");
 
-        jLabel3.setText("BFS by Q");
+        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        jLabel3.setText(" breadth first traversal");
 
         jTextArea1.setColumns(20);
         jTextArea1.setFont(new java.awt.Font("Monospaced", 0, 16)); // NOI18N
