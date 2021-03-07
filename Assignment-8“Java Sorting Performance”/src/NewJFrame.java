@@ -4,7 +4,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.Random;
-import java.util.concurrent.TimeUnit;
+
 
 
 /*
@@ -17,8 +17,6 @@ import java.util.concurrent.TimeUnit;
  * @author User
  */
 public class NewJFrame extends javax.swing.JFrame {
-
-    public int time = 0;
 
     public int ArrayInt[];
     public String ArrayString[];
@@ -394,7 +392,7 @@ public class NewJFrame extends javax.swing.JFrame {
 //        if (k100 || k1k) {
 //            jButton2.doClick();
 //        }
-
+        //set sec. to null
         jTextField1.setText(null);
         jTextField2.setText(null);
         jTextField3.setText(null);
