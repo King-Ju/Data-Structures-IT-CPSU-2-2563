@@ -4,8 +4,8 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.Random;
-
-
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -22,9 +22,9 @@ public class NewJFrame extends javax.swing.JFrame {
     public String ArrayString[];
     public Citizen ArrayCitizen[];
 
-    public LinkedList<Integer> LinkedListInt = new LinkedList<>();
-    public LinkedList<String> LinkedListString = new LinkedList<>();
-    public LinkedList<Citizen> LinkedListCitizen = new LinkedList<>();
+    public LinkedList<Integer> LinkedListInt;
+    public LinkedList<String> LinkedListString;
+    public LinkedList<Citizen> LinkedListCitizen;
 
     class CitizenComparator implements Comparator<Citizen> {
 
@@ -294,6 +294,7 @@ public class NewJFrame extends javax.swing.JFrame {
         boolean k100k = jRadioButton4.isSelected();
         boolean array = jRadioButton5.isSelected();
         boolean linkedlist = jRadioButton6.isSelected();
+
         if (array) {
             if (k100) {
                 jProgressBar1.setMaximum(100);
@@ -349,6 +350,9 @@ public class NewJFrame extends javax.swing.JFrame {
                 }
             }
         } else if (linkedlist) {
+            LinkedListInt = new LinkedList<>();
+            LinkedListString = new LinkedList<>();
+            LinkedListCitizen = new LinkedList<>();
             if (k100) {
                 jProgressBar1.setMaximum(100);
                 for (int i = 0; i < 100; i++) {
@@ -389,9 +393,13 @@ public class NewJFrame extends javax.swing.JFrame {
             }
 
         }
-//        if (k100 || k1k) {
-//            jButton2.doClick();
-//        }
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(NewJFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        jButton2.setEnabled(true);
+        
         //set sec. to null
         jTextField1.setText(null);
         jTextField2.setText(null);
@@ -404,62 +412,63 @@ public class NewJFrame extends javax.swing.JFrame {
         if (jRadioButton5.isSelected()) {
             double timeArrayint = 0;
             for (int i = 0; i < 3; i++) {
-                long start = System.nanoTime();
-                Arrays.sort(ArrayInt);
-                long finish = System.nanoTime();
-                long timeElapsed = finish - start;
+            long start = System.nanoTime();
+            Arrays.sort(ArrayInt);
+            long finish = System.nanoTime();
+            long timeElapsed = finish - start;
 
-                System.out.format("Milli = %s, ( S_Start : %s, S_End : %s ) \n", timeElapsed, start, finish);
+            System.out.format("Milli = %s, ( S_Start : %s, S_End : %s ) \n", timeElapsed, start, finish);
 //        System.out.println("ArrayInt" + timeElapsed * 0.0000000001); //divide by 1000000 to get milliseconds. 1 mill = 0.001 sec. *0.000001*0.001
-                double t = timeElapsed * 0.0000000001;
-                System.out.println(t);
-                String tt = Double.toString(t);
+            double t = timeElapsed * 0.0000000001;
+            System.out.println(t);
+            String tt = Double.toString(t);
                 timeArrayint += t;
-                System.out.println("Int tt " + tt);
-                String ttt = (String) tt.substring(0, 4);
-                System.out.println(ttt);
-                jTextField1.setText(ttt);
+            System.out.println("Int tt " + tt);
+            String ttt = (String) tt.substring(0, 4);
+            System.out.println(ttt);
+            jTextField1.setText(ttt);
 //        System.out.println(Citizen.millisToShortDHMS((long) (timeElapsed * 0.000001)));
             }
-            timeArrayint = timeArrayint / 3;
+            timeArrayint = timeArrayint /3;
             jTextField1.setText((Double.toString(timeArrayint)).substring(0, 4));
 
             timeArrayint = 0;
             for (int i = 0; i < 3; i++) {
-                long startString = System.nanoTime();
-                Arrays.sort(ArrayString);
-                long finishString = System.nanoTime();
-                long timeElapsedString = finishString - startString;
-                double t = timeElapsedString * 0.0000000001;
-                System.out.format("Milli = %s, ( S_Start : %s, S_End : %s ) \n", timeElapsedString, startString, finishString);
-                System.out.println(t);
+            long startString = System.nanoTime();
+            Arrays.sort(ArrayString);
+            long finishString = System.nanoTime();
+            long timeElapsedString = finishString - startString;
+            double t = timeElapsedString * 0.0000000001;
+            System.out.format("Milli = %s, ( S_Start : %s, S_End : %s ) \n", timeElapsedString, startString, finishString);
+            System.out.println(t);
                 timeArrayint += t;
-                String tString = Double.toString(t);
-                System.out.println("String tt " + tString);
-                String ttString = (String) tString.substring(0, 4);
-                System.out.println(ttString);
-                jTextField2.setText(ttString);
+            String tString = Double.toString(t);
+            System.out.println("String tt " + tString);
+            String ttString = (String) tString.substring(0, 4);
+            System.out.println(ttString);
+            jTextField2.setText(ttString);
             }
-            timeArrayint = timeArrayint / 3;
+            timeArrayint = timeArrayint/3 ;
             jTextField2.setText((Double.toString(timeArrayint)).substring(0, 4));
 
             timeArrayint = 0;
             for (int i = 0; i < 3; i++) {
-                long start = System.nanoTime();
-                Arrays.sort(ArrayCitizen, new CitizenComparator());
-                long finish = System.nanoTime();
-                long timeElapsed = finish - start;
-                double t = timeElapsed * 0.0000000001;
-                System.out.format("Milli = %s, ( S_Start : %s, S_End : %s ) \n", timeElapsed, start, finish);
-                System.out.println(t);
+            long startCitizen = System.nanoTime();
+            Arrays.sort(ArrayCitizen, new CitizenComparator());
+            long finishCitizen = System.nanoTime();
+            long timeElapsedCitizen = finishCitizen - startCitizen;
+            double t = timeElapsedCitizen * 0.0000000001;
+            System.out.format("Milli = %s, ( S_Start : %s, S_End : %s ) \n", timeElapsedCitizen, startCitizen, finishCitizen);
+            System.out.println(t);
                 timeArrayint += t;
-                String tCitizen = Double.toString(t);
-                System.out.println("Citizentt " + tCitizen);
-                String ttCitizen = (String) tCitizen.substring(0, 4);
-                System.out.println(ttCitizen);
-                jTextField3.setText(ttCitizen);
+            String tCitizen = Double.toString(t);
+            System.out.println("Citizentt " + tCitizen);
+            String ttCitizen = (String) tCitizen.substring(0, 4);
+            System.out.println(ttCitizen);
+            jTextField3.setText(ttCitizen);
             }
-            timeArrayint = timeArrayint / 3;
+            timeArrayint = timeArrayint/3 ;
+            System.out.println(Double.toString(timeArrayint));
             jTextField3.setText((Double.toString(timeArrayint)).substring(0, 4));
         }
 
@@ -507,9 +516,10 @@ public class NewJFrame extends javax.swing.JFrame {
             jTextField3.setText(ttCitizen);
         }
 
-        jTextField1.setText(jTextField1.getText()+" sec.");
-        jTextField2.setText(jTextField2.getText()+" sec.");
-        jTextField3.setText(jTextField3.getText()+" sec.");
+        jTextField1.setText(jTextField1.getText() + " sec.");
+        jTextField2.setText(jTextField2.getText() + " sec.");
+        jTextField3.setText(jTextField3.getText() + " sec.");
+
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
@@ -518,6 +528,7 @@ public class NewJFrame extends javax.swing.JFrame {
         jRadioButton2.setSelected(false);
         jRadioButton3.setSelected(false);
         jRadioButton4.setSelected(false);
+        jButton2.setEnabled(false);
     }//GEN-LAST:event_jRadioButton1ActionPerformed
 
     private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton2ActionPerformed
@@ -526,6 +537,7 @@ public class NewJFrame extends javax.swing.JFrame {
 //        jRadioButton2.setSelected(false);
         jRadioButton3.setSelected(false);
         jRadioButton4.setSelected(false);
+        jButton2.setEnabled(false);
     }//GEN-LAST:event_jRadioButton2ActionPerformed
 
     private void jRadioButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton3ActionPerformed
@@ -534,6 +546,7 @@ public class NewJFrame extends javax.swing.JFrame {
         jRadioButton2.setSelected(false);
 //        jRadioButton3.setSelected(false);
         jRadioButton4.setSelected(false);
+        jButton2.setEnabled(false);
     }//GEN-LAST:event_jRadioButton3ActionPerformed
 
     private void jRadioButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton4ActionPerformed
@@ -542,18 +555,21 @@ public class NewJFrame extends javax.swing.JFrame {
         jRadioButton2.setSelected(false);
         jRadioButton3.setSelected(false);
 //        jRadioButton4.setSelected(false);
+        jButton2.setEnabled(false);
     }//GEN-LAST:event_jRadioButton4ActionPerformed
 
     private void jRadioButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton5ActionPerformed
         // TODO add your handling code here:
 //       jRadioButton5.setSelected(false);
         jRadioButton6.setSelected(false);
+        jButton2.setEnabled(false);
     }//GEN-LAST:event_jRadioButton5ActionPerformed
 
     private void jRadioButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton6ActionPerformed
         // TODO add your handling code here:
         jRadioButton5.setSelected(false);
 //        jRadioButton6.setSelected(false);
+        jButton2.setEnabled(false);
     }//GEN-LAST:event_jRadioButton6ActionPerformed
 
     /**
